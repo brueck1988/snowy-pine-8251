@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 2021_04_23_145509) do
   create_table "flight_passengers", force: :cascade do |t|
     t.bigint "flight_id"
     t.bigint "passenger_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["flight_id"], name: "index_flight_passengers_on_flight_id"
     t.index ["passenger_id"], name: "index_flight_passengers_on_passenger_id"
   end

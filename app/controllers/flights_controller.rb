@@ -1,6 +1,5 @@
 class FlightsController < ApplicationController
-  # def show
-  #   @flight = Flight.find(params[:id])
-  #   @airline = @flight.airline
-  # end
+  def index
+    @flights = Flight.all
+  end
 end
