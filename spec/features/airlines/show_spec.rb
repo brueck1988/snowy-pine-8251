@@ -34,22 +34,9 @@ RSpec.describe 'the airline show page' do
 
       expect(page).to have_content(@passenger_2.name)
       expect(page).to have_content(@passenger_3.name)
-      
+
       expect(page).to_not have_content(@passenger_1.name)
       expect(page).to_not have_content(@passenger_4.name)
       expect(page).to_not have_content(@passenger_5.name)
     end
 end
-
-
-
-
-# User Story 3, Airline's Passengers
-#
-# As a visitor
-# When I visit an airline's show page
-# Then I see a list of passengers that have flights on that airline
-# And I see that this list is unique (no duplicate passengers)
-# And I see that this list only includes adult passengers
-#
-# (Note: an adult is anyone with age greater than or equal to 18)
