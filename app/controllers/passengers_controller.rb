@@ -1,8 +1,8 @@
 class PassengersController < ApplicationController
-  # def destroy
-  #   passenger = Passenger.find(params[:id])
-  #   flight_id = passenger.flight.id
-  #   passenger.destroy
-  #   redirect_to "/flights/#{flight_id}"
-  # end
+  def destroy
+    passenger = Passenger.find(params[:id])
+    flight = Flight.find(params[:flight_id])
+    flight.passengers.delete(passenger)
+    redirect_to "/flights"
+  end
 end

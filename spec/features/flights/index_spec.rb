@@ -64,10 +64,14 @@ RSpec.describe 'the flight index page' do
     end
   end
 
+  it 'us2 - displays a button to delete each passenger' do
+    visit "/flights"
+    within("#flight-#{@flight_1.id}") do
+      click_on("Remove #{@passenger_1.name}")
 
-# As a visitor
-# When I visit the flights index page
-# I see a list of all flight numbers
-# And next to each flight number I see the name of the Airline of that flight
-# And under each flight number I see the names of all that flight's passengers
+      expect(page).to have_current_path("/flights")
+
+      expect(page).to_not have_content(@passenger_1.name)
+    end
+  end
 end
