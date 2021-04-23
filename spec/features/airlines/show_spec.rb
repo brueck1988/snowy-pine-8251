@@ -1,11 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Airline, type: :model do
-  describe "relationships" do
-    it {should have_many :flights}
-    it { should have_many(:passengers).through(:flights) }
-  end
-
+RSpec.describe 'the airline show page' do
   before(:each) do
     @airline_1 = Airline.create!(name: "Frontier")
     @airline_2 = Airline.create!(name: "Delta")
@@ -33,12 +28,28 @@ RSpec.describe Airline, type: :model do
     @flight_passenger_10 = FlightPassenger.create!(flight: @flight_3, passenger: @passenger_5)
   end
 
-  describe "instance methods" do
-    describe "#passengers_for_show" do
-      it 'shows the names of the airlines adult passengers and removes duplicates' do
-        expect(@airline_1.passengers_for_show[0].name).to eq('Jake')
-        expect(@airline_1.passengers_for_show[1].name).to eq('Joe')
-      end
+  it 'us3 - lists the unique adult passengers on this airline' do
+    visit "/airlines/#{@airline_1.id}"
+      expect(page).to have_content(@airline_1.name)
+
+      expect(page).to have_content(@passenger_2.name)
+      expect(page).to have_content(@passenger_3.name)
+      
+      expect(page).to_not have_content(@passenger_1.name)
+      expect(page).to_not have_content(@passenger_4.name)
+      expect(page).to_not have_content(@passenger_5.name)
     end
-  end
 end
+
+
+
+
+# User Story 3, Airline's Passengers
+#
+# As a visitor
+# When I visit an airline's show page
+# Then I see a list of passengers that have flights on that airline
+# And I see that this list is unique (no duplicate passengers)
+# And I see that this list only includes adult passengers
+#
+# (Note: an adult is anyone with age greater than or equal to 18)
